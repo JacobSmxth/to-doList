@@ -14,7 +14,8 @@ taskButton.addEventListener("click", () => {
     if (inputText) {
         listCounter++;
 
-    
+        // TODO: Add some sort of element to delete task when user wants to.
+        // It needs to be given class name to style it correctly and some identifier to correctly delete the right task to delete. I'm thinking use the listCounter variable to keep things simple
         let taskText = document.createTextNode(inputText)
         newTask.append(taskText)
         taskList.append(newTask)

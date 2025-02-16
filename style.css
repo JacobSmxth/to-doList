@@ -115,6 +115,7 @@ ul li.checked::before {
     background: #000;
 }
 
+/* TODO: Delete this and create new element for deleting tasks */
 ul li::after {
     content: 'x';
     position: absolute;
