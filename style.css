@@ -1,0 +1,116 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+ 
+}
+
+html {
+    font-size: 16px;
+}
+
+ol, ul {
+    list-style-type: none;
+}
+
+#container {
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background: linear-gradient(135deg, #801b0d, #4e1941);
+    color: #dfdfdf;
+    min-height: 100vh;
+    height: 100%;
+    padding: 10px;
+}
+
+.todo-list {
+    width: 100%;
+    max-width: 540px;
+    background: #fdfdfd;
+    margin: 100px auto 20px;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+}
+
+.todo-list h2 {
+    color: #002765;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #e7e7e7;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 25px;
+}
+
+input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 10px;
+    font-weight: 14px;
+}
+
+button {
+    border: none;
+    outline: none;
+    padding: 16px 50px;
+    background: #002765;
+    color: #e7e7e7;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 40px;
+}
+
+ul li {
+    position: relative;
+    list-style: none;
+    font-size: 17px;
+    padding: 12px 8px 12px 50px;
+    user-select: none;
+    cursor: pointer;
+    color: #222;
+}
+
+ul li::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: solid 1px black;
+    padding: 5px;
+    background-color: transparent;
+    background-size: cover;
+    background-position: center;
+    top: 12px;
+    left: 8px;
+}
+
+ul li.checked {
+    text-decoration: line-through;
+    color: #555;
+}
+
+ul li.checked::before {
+    background: #000;
+}
+
+ul li::after {
+    content: 'x';
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    color: #000;
+}
