@@ -4,11 +4,7 @@
 }
 
 body {
- 
-}
-
-html {
-    font-size: 16px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 ol, ul {
@@ -16,7 +12,7 @@ ol, ul {
 }
 
 #container {
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    
     background: linear-gradient(135deg, #801b0d, #4e1941);
     color: #dfdfdf;
     min-height: 100vh;
@@ -26,10 +22,10 @@ ol, ul {
 
 .todo-list {
     width: 100%;
-    max-width: 540px;
+    max-width: 33.75rem;
     background: #fdfdfd;
-    margin: 100px auto 20px;
-    padding: 40px 30px 70px;
+    margin: 6.25rem auto 1.25rem;
+    padding: 2.5rem 1.875rem 4.375rem;
     border-radius: 10px;
 }
 
@@ -37,12 +33,12 @@ ol, ul {
     color: #002765;
     display: flex;
     align-items: center;
-    margin-bottom: 2px;
+    margin-bottom: .125rem;
 }
 
 .todo-list h3 {
-    font-size: 12px;
-    margin-bottom: 15px;
+    font-size: .75rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: center;
     color: #ff504a;
@@ -53,9 +49,9 @@ ol, ul {
     align-items: center;
     justify-content: space-between;
     background: #e7e7e7;
-    border-radius: 30px;
-    padding-left: 20px;
-    margin-bottom: 25px;
+    border-radius: 1.875rem;
+    padding-left: 1.25rem;
+    margin-bottom: 1.5625rem;
 }
 
 input {
@@ -63,26 +59,26 @@ input {
     border: none;
     outline: none;
     background: transparent;
-    padding: 10px;
-    font-weight: 14px;
+    padding: .625rem;
+    font-weight: .875rem;
 }
 
 button {
     border: none;
     outline: none;
-    padding: 16px 50px;
+    padding: 1em 3.125em;
     background: #002765;
     color: #e7e7e7;
-    font-size: 16px;
+    font-size: 1rem;
     cursor: pointer;
-    border-radius: 40px;
+    border-radius: 2.5em;
 }
 
 ul li {
     position: relative;
     list-style: none;
-    font-size: 17px;
-    padding: 12px 8px 12px 50px;
+    font-size: 1rem;
+    padding: .75em .5em .75em 3.125em;
     user-select: none;
     cursor: pointer;
     color: #222;
@@ -90,20 +86,20 @@ ul li {
 
 ul li::before {
     content: '';
-    width: 12px;
-    height: 12px;
+    width: .75rem;
+    height: .75rem;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    border: solid 1px black;
-    padding: 5px;
+    border: solid .0625rem black;
+    padding: .3125rem;
     background-color: transparent;
     background-size: cover;
     background-position: center;
-    top: 12px;
-    left: 8px;
+    top: .75rem;
+    left: .5rem;
 }
 
 ul li.checked {
@@ -115,11 +111,60 @@ ul li.checked::before {
     background: #000;
 }
 
-/* TODO: Delete this and create new element for deleting tasks */
-ul li::after {
-    content: 'x';
+ul li span.close {
     position: absolute;
-    top: 8px;
-    right: 12px;
+    background: url('icons8-close.svg');
+    background-size: contain;
+    width: .75rem;
+    height: .75rem;
+    top: 1rem;
+    right: .75rem;
     color: #000;
 }
+
+
+#deletePopup {
+    z-index: 1000;
+    position: fixed;
+    padding: 1rem;
+    border: #4e1941 solid .25rem;
+    border-radius: 1rem;
+    text-align: center;
+    background: #fdfdfd;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 25rem;
+    margin: 10rem auto 15rem;
+    box-shadow: #2b1010 0rem 1rem 1rem;
+
+}
+
+#deletePopup.hidden {
+    display: none;
+}
+
+#deletePopup h2 {
+    color: #03193b;
+}
+
+div.deleteChoices {
+    display: flex;
+    justify-content: space-around;
+}
+
+div.deleteChoices button {
+    padding: .5rem 2rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    
+}
+
+#yesDelete {
+    background-color: #4e1941;
+}
+
+#noDelete {
+    background-color: #801b0d;
+}
+
