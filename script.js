@@ -3,12 +3,12 @@ const taskInput = document.querySelector("#input-box")
 const taskButton = document.querySelector("#addTask")
 const taskList = document.querySelector("#listContainer")
 const taskCounter = document.querySelector("#counter")
-const deletePopup = document.querySelector("#deletePopup")
 
-
+// Keeping track of how many tasks there are
 let listCounter = 0
 let temp
 
+// For quicker typing, i'm lazy
 function l(v) {
     console.log(v)
 }
@@ -19,6 +19,8 @@ taskButton.addEventListener("click", () => {
     const newTask = document.createElement('li')
     const newDelete = document.createElement('span')
     
+
+    // Makes sure there is text in input before submiting
     if (inputText) {
         listCounter++;
 
@@ -54,6 +56,8 @@ document.addEventListener("click", (e) => {
         
         let listItemID = itemClass[1]
         const removedItem = document.getElementById(listItemID)
+
+        // I have plans for an undo feature
         temp = removedItem.innerHTML
         removedItem.remove()
         listCounter--
@@ -62,12 +66,12 @@ document.addEventListener("click", (e) => {
 
 })
 
-// Finish task 
+// Finish task event
 document.addEventListener('click', (e) => {
     const item = e.target;
     const selectItem = document.getElementById(item.id)
 
-    
+    // Could have uses classList.toggle() function here
     switch (selectItem.className) {
         case "":
             selectItem.className = "checked"

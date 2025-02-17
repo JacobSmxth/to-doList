@@ -123,6 +123,8 @@ ul li span.close {
 }
 
 
+/* Potential delete popup of sorts
+
 #deletePopup {
     z-index: 1000;
     position: fixed;
@@ -166,5 +168,5 @@ div.deleteChoices button {
 
 #noDelete {
     background-color: #801b0d;
-}
+} */
 
