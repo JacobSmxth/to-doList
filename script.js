@@ -1,3 +1,4 @@
+// Main variables
 const todoList = document.querySelector(".todo-list")
 const taskInput = document.querySelector("#input-box")
 const taskButton = document.querySelector("#addTask")
@@ -6,19 +7,18 @@ const taskCounter = document.querySelector("#counter")
 
 // Keeping track of how many tasks there are
 let listCounter = 0
-let temp
 
 // For quicker typing, i'm lazy
 function l(v) {
     console.log(v)
 }
 
-// Adding task event
-taskButton.addEventListener("click", () => {
-    let inputText = taskInput.value
+
+
+function addTask() {
+    let inputText = taskInput.value;
     const newTask = document.createElement('li')
     const newDelete = document.createElement('span')
-    
 
     // Makes sure there is text in input before submiting
     if (inputText) {
@@ -41,46 +41,36 @@ taskButton.addEventListener("click", () => {
 
             setTimeout(() => {
                 taskInput.placeholder = "Add your task"
-            }, "2750")
+            }, 2750)
         }
+}
 
-});
+// Adding task event
+taskButton.addEventListener("click", addTask)
 
-// Removing task event
+
+
+// Global document event listener
 document.addEventListener("click", (e) => {
     const item = e.target
     const itemClass = item.classList
+    const selectItem = document.getElementById(item.id)
 
-
+    // Removing task event
     if(itemClass.contains("close")) {
         
         let listItemID = itemClass[1]
         const removedItem = document.getElementById(listItemID)
 
-        // I have plans for an undo feature
-        temp = removedItem.innerHTML
         removedItem.remove()
         listCounter--
         taskCounter.innerText  = " " + listCounter
     }
 
-})
+    // Finish task event
 
-// Finish task event
-document.addEventListener('click', (e) => {
-    const item = e.target;
-    const selectItem = document.getElementById(item.id)
-
-    // Could have uses classList.toggle() function here
-    switch (selectItem.className) {
-        case "":
-            selectItem.className = "checked"
-            break;
-        case "checked":
-            selectItem.className = ""
-            break;
-        default:
-            l("failed")
-            break;
+    if (selectItem) {
+        selectItem.classList.toggle("checked")
     }
 })
+
