@@ -47,6 +47,9 @@ function addTask(task) {
         // Pushes the data to the array
         listData.push(newItem)
 
+        // Clear input for next task
+        taskInput.value = ""
+
         // Save the array to localStorage
         saveTasks()
 
@@ -63,22 +66,12 @@ function removeTask(taskItem) {
     updateTasks()
 }
 
-function checkTask(taskItem) {
-    const taskID = parseInt(taskItem.dataset.id, 10)
-    const index = listData.findIndex(task => task.id === taskID)
+function checkTask(id) {
+    const index = listData.findIndex(task => task.id === id)
     if (index !== -1) {
-        switch (listData[index].checked) {
-            case true:
-                listData[index].checked = false;
-                break;
-            case false:
-                listData[index].checked = true;
-                break;
-            default:
-                l("ERROR!")
-                break;
-        }
+        listData[index].checked = !listData[index].checked
     }
+    console.log(listData[index].checked)
     saveTasks()
     updateTasks()
 }
@@ -100,13 +93,13 @@ function updateTasks() {
         }
     }
     listData.forEach(task => {
-        updateUI(task.task, task.id)
+        updateUI(task.task, task.id, task.checked)
     })
     updateCounter()
 }
 
 // Function to add item to UI
-function updateUI(string, id) {
+function updateUI(string, id, checked) {
     const newTask = document.createElement('li')
     const newDelete = document.createElement('span')
     const taskNode = document.createTextNode(string)
@@ -114,22 +107,35 @@ function updateUI(string, id) {
     newTask.append(newDelete)
     taskList.append(newTask)
     newTask.classList.add("task")
+    newTask.dataset.id = id;
     newDelete.classList.add("close")
     newDelete.dataset.id = id;
+
+    if (checked) {
+        newTask.classList.add('checked')
+    }
 }
 
+// Detects any click of the add task button
 taskButton.addEventListener("click", () => addTask(taskInput.value))
 
 taskList.addEventListener('click', (e) => {
     let clicked = e.target;
+    let clickID = parseInt(clicked.dataset.id, 10);
 
+
+    // Checks to see if user wants to delete task
     if(clicked.className === "close") {
         removeTask(clicked)
     }
 
-    if(clicked.className === "task") {
-        checkTask(clicked)
-    }
+    // Checks if user is trying to check off task
+    listData.forEach(task => {
+        if(task.id === clickID) {
+            checkTask(clickID)
+        } 
+    })
+
 })
 
 
