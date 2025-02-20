@@ -66,15 +66,27 @@ function removeTask(taskItem) {
     updateTasks()
 }
 
+
+// Checks the task and moves them to top of list
 function checkTask(id) {
     const index = listData.findIndex(task => task.id === id)
     if (index !== -1) {
         listData[index].checked = !listData[index].checked
     }
-    console.log(listData[index].checked)
+
+    // move task to top of list
+    if (listData[index].checked) {
+        let temp = listData[index];
+        listData = listData.filter(task => task.id !== listData[index].id)
+
+        listData.unshift(temp)
+
+    }
+
     saveTasks()
     updateTasks()
 }
+
 
 // Function to update the task counter after every action to the list
 function updateCounter() {
