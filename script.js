@@ -6,14 +6,10 @@ const taskList = document.querySelector("#listContainer")
 const taskCounter = document.querySelector("#counter")
 let closeables = document.getElementsByClassName("close")
 
-// Keeping track of how many tasks there are
-let listCounter = 0
-
 // For quicker typing, i'm lazy
 function l(v) {
     console.log(v)
 }
-
 
 let listData = []
 
@@ -23,7 +19,6 @@ function saveTasks() {
     localStorage.setItem("listData", JSON.stringify(listData))
 }
 
-
 // This function loads the current items in the localStorage into the page
 function loadTasks() {
     const storedTasks = localStorage.getItem("listData")
@@ -32,12 +27,18 @@ function loadTasks() {
     }
 }
 
-
 // This function is to add a new item to the list
 function addTask(task) {
+    // Check for duplicates
+    const foundDuplicate = listData.some(data => data.task === task)
     // Create new object representing the task
     // Conditional to check for input, to avoid blank tasks
-    if (task) {
+    if (!task) {
+        alert("Please enter a task into the input!")
+    } else if (foundDuplicate) {
+        alert("You have already added that task!")
+        taskInput.value = ""
+    } else{
         const newItem = {
             id: Date.now(),
             task: task,
@@ -55,7 +56,7 @@ function addTask(task) {
 
         // Updates the UI and counter
         updateTasks()
-    }
+    } 
 }
 
 // This function is to remove any task the user wants to remove from list
@@ -65,7 +66,6 @@ function removeTask(taskItem) {
     saveTasks()
     updateTasks()
 }
-
 
 // Checks the task and moves them to top of list
 function checkTask(id) {
@@ -87,14 +87,12 @@ function checkTask(id) {
     updateTasks()
 }
 
-
 // Function to update the task counter after every action to the list
 function updateCounter() {
     let num;
     num = listData.length
     taskCounter.innerText = "" + num;
 }
-
 
 // This function updates the DOM to adjust list based on listData array
 function updateTasks() {
@@ -139,20 +137,13 @@ taskList.addEventListener('click', (e) => {
     // Checks to see if user wants to delete task
     if(clicked.className === "close") {
         removeTask(clicked)
+        return
     }
 
-    // Checks if user is trying to check off task
-    listData.forEach(task => {
-        if(task.id === clickID) {
-            checkTask(clickID)
-        } 
-    })
+    // Otherwise assume user is trying to check off task
+    checkTask(clickID)
 
 })
-
-
-
-
 
 
 // On page load, this will retrieve any localStorage
